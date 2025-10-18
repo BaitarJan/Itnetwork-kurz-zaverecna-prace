@@ -23,22 +23,53 @@ public class Main {
 
             switch (volba) {
                 case "1": {
-                    System.out.print("Zadejte jméno: ");
-                    String jmeno = scanner.nextLine().trim();
-                    System.out.print("Zadejte příjmení: ");
-                    String prijmeni = scanner.nextLine().trim();
-                    System.out.print("Zadejte věk: ");
+                    // Zadání jména
+                    String jmeno;
+                    do {
+                        System.out.print("Zadejte jméno: ");
+                        jmeno = scanner.nextLine().trim();
+                        if (jmeno.isEmpty()) {
+                            System.out.println("Jméno nesmí být prázdné.");
+                        }
+                    } while (jmeno.isEmpty());
 
-                    int vek;
-                    try {
-                        vek = Integer.parseInt(scanner.nextLine().trim());
-                    } catch (NumberFormatException e) {
-                        System.out.println("Neplatný věk!");
-                        break;
-                    }
-                    System.out.print("Zadejte telefon: ");
-                    String telefon = scanner.nextLine().trim();
+                    // Zadání příjmení
+                    String prijmeni;
+                    do {
+                        System.out.print("Zadejte příjmení: ");
+                        prijmeni = scanner.nextLine().trim();
+                        if (prijmeni.isEmpty()) {
+                            System.out.println("Příjmení nesmí být prázdné.");
+                        }
+                    } while (prijmeni.isEmpty());
 
+                    // Zadání věku
+                    int vek = -1;
+                    do {
+                        System.out.print("Zadejte věk: ");
+                        String vekStr = scanner.nextLine().trim();
+                        try {
+                            vek = Integer.parseInt(vekStr);
+                            if (vek < 0 || vek > 150) {
+                                System.out.println("Neplatný věk (0-150).");
+                                vek = -1; // reset pro cyklus
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Neplatný vstup pro věk!");
+                        }
+                    } while (vek == -1);
+
+                    // Zadání telefonu
+                    String telefon;
+                    do {
+                        System.out.print("Zadejte telefon: ");
+                        telefon = scanner.nextLine().trim();
+                        if (telefon.isEmpty()) {
+                            System.out.println("Telefon nesmí být prázdný.");
+                        }
+                    } while (telefon.isEmpty());
+
+                    // Přidání pojištěného
                     Pojistenec p = new Pojistenec(jmeno, prijmeni, telefon, vek);
                     evidence.pridej(p);
                     System.out.println("Pojištěný přidán.");

@@ -28,7 +28,7 @@ public class Pojistenec {
         if (telefon == null || telefon.trim().isEmpty()) {
             throw new IllegalArgumentException("Telefon nesmí být prázdný.");
         }
-        if (vek >= 0 || vek <= 150) {
+        if (vek < 0 || vek > 150) {
             throw new IllegalArgumentException("Neplatný věk.");
         }
 
